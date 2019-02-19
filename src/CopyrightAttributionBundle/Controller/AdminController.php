@@ -1,7 +1,13 @@
 <?php
+
 namespace JRemmurd\CopyrightAttributionBundle\Controller;
 
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class AdminController
@@ -24,6 +30,15 @@ class AdminController extends \Pimcore\Bundle\AdminBundle\Controller\AdminContro
     {
         $this->contentRoute = $route;
         $this->subjects = $subjects;
+    }
+
+    /**
+     * @Route("/copyright-attribution/add-flaticon", methods={"GET"})
+     */
+    public function addFlaticonAction()
+    {
+        // TODO
+        return new Response();
     }
 
     /**

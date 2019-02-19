@@ -19,6 +19,12 @@ pimcore.bundle.CopyrightAttributionBundle.Tab = Class.create({
                 handler: this.reload.bind(this)
             });
 
+            this.flaticonButton = new Ext.Button({
+                text: t("add"),
+                iconCls: "pimcore_icon_add",
+                handler: this.addFlaticon.bind(this)
+            });
+
             // create new panel
             this.layout = new Ext.Panel({
                 id: this.id,
@@ -29,8 +35,11 @@ pimcore.bundle.CopyrightAttributionBundle.Tab = Class.create({
                 autoScroll: true,
                 closable: true,
                 containerScroll: true,
-                html: '<iframe style="border:none" src="' + this.src + '" width="100%" height="99%"></iframe>',
-                tbar: [this.reloadButton]
+                html: '<iframe id="' + this.id + '_iframe" style="border:none" src="' + this.src + '" width="100%" height="99%"></iframe>',
+                tbar: [
+                    this.reloadButton,
+                    this.flaticonButton,
+                ]
             });
 
             // add event listener
@@ -51,9 +60,31 @@ pimcore.bundle.CopyrightAttributionBundle.Tab = Class.create({
         return this.layout;
     },
 
+    addFlaticon: function () {
+        var dlg = Ext.MessageBox.prompt('Name', 'Please enter your name:', function (btn, text) {
+            if (btn != 'ok') {
+                return;
+            }
+
+            Ext.Ajax.request({
+                url: "/admin/copyright-attribution/add-flaticon",
+                extraParams: {
+                    text: text
+                }
+            })
+                .then(function () {
+                    pimcore.helpers.showNotification(t("success"), t("saved_successfully"), "success");
+                    // todo change iframe content
+                })
+                .otherwise(function () {
+                    pimcore.helpers.showNotification(t("error"), t("saving_failed"), "error");
+                });
+        });
+    },
+
     reload: function () {
         try {
-            Ext.get('copyright_attribution_tab').dom.src = this.src;
+            document.getElementById(this.id + "_iframe").src = this.src;
         } catch (e) {
             console.log(e);
         }
