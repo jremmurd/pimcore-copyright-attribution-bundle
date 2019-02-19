@@ -22,4 +22,4 @@ copyright_attribution:
 ```
 
 ## Impressions
-![Screenshot](./docs/screenshot.PNG "Impression")
+![Screenshot](./docs/screenshot.png "Impression")
