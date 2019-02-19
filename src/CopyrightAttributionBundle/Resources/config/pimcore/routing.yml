@@ -1,0 +1,4 @@
+copyright_attribution:
+    resource: "@CopyrightAttributionBundle/Controller/"
+    type:     annotation
+    prefix:   /

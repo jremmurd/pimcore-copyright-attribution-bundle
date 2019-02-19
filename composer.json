@@ -1,0 +1,38 @@
+{
+  "name": "jremmurd/pimcore-copyright-attribution-bundle",
+  "license": "GPL-3.0-or-later",
+  "type": "pimcore-bundle",
+  "config": {
+    "sort-packages": true
+  },
+  "keywords": [
+    "pimcore",
+    "bundle",
+    "icons",
+    "authors",
+    "attribution"
+  ],
+  "authors": [
+    {
+      "name": "Julian Raab",
+      "email": "julian@raab.media",
+      "homepage": "http://raab.media"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "pimcore/pimcore": "^5.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "JRemmurd\\": "src/"
+    }
+  },
+  "extra": {
+    "pimcore": {
+      "bundles": [
+        "JRemmurd\\CopyrightAttributionBundle\\CopyrightAttributionBundle"
+      ]
+    }
+  }
+}
