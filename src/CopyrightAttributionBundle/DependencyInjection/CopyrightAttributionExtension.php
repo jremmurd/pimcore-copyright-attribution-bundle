@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
  * Class CreditAuthorsExtension
  * @package JRemmurd\CopyrightAttributionBundle\DependencyInjection
  */
-class CopyrightAttributionBundle extends \Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension
+class CopyrightAttributionExtension extends \Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension
 {
     /**
      * {@inheritdoc}

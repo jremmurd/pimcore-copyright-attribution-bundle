@@ -2,7 +2,7 @@ pimcore.registerNS("pimcore.bundle.CopyrightAttributionBundle");
 
 pimcore.bundle.CopyrightAttributionBundle = Class.create(pimcore.plugin.admin, {
     getClassName: function () {
-        return "pimcore.bundle.CreditAuthorsBundle";
+        return "pimcore.bundle.CopyrightAttributionBundle";
     },
 
     initialize: function () {
@@ -10,7 +10,7 @@ pimcore.bundle.CopyrightAttributionBundle = Class.create(pimcore.plugin.admin, {
     },
 
     pimcoreReady: function (params, broker) {
-        this.addIconAuthorCreditMenu();
+        this.addCopyrightAttributionMenuItem();
     },
 
     parseResponse: function (response) {
@@ -23,7 +23,7 @@ pimcore.bundle.CopyrightAttributionBundle = Class.create(pimcore.plugin.admin, {
         return responseData;
     },
 
-    addIconAuthorCreditMenu : function(){
+    addCopyrightAttributionMenuItem : function(){
         var menu = pimcore.globalmanager.get("layout_toolbar").extrasMenu;
 
         menu.add({
