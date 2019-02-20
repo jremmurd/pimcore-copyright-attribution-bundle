@@ -20,7 +20,7 @@ pimcore.bundle.CopyrightAttributionBundle.Tab = Class.create({
             });
 
             this.flaticonButton = new Ext.Button({
-                text: t("add-flaticon"),
+                text: t("copyright_attribution.add-flaticon"),
                 iconCls: "pimcore_icon_add",
                 handler: this.addFlaticon.bind(this)
             });
@@ -81,7 +81,7 @@ pimcore.bundle.CopyrightAttributionBundle.Tab = Class.create({
                         },
                         fieldDefaults: {
                             msgTarget: 'side',
-                            labelWidth: 100
+                            labelWidth: 80
                         },
                         items: [
                             {
@@ -95,20 +95,20 @@ pimcore.bundle.CopyrightAttributionBundle.Tab = Class.create({
                                 items: [
                                     {
                                         xtype: 'textfield',
-                                        width: 400,
+                                        width: 450,
                                         fieldLabel: t("copyright_attribution.subject"),
                                         id: this.layout.id + "_subject"
                                     },
                                     {
                                         xtype: 'textfield',
-                                        width: 400,
+                                        width: 450,
 
                                         fieldLabel: t("copyright_attribution.flaticon-text"),
                                         id: this.layout.id + "_flaticon-text"
                                     },
                                     {
                                         xtype: 'button',
-                                        text: t("add-flaticon"),
+                                        text: t("copyright_attribution.add-flaticon"),
                                         style: "margin-top: 2em",
                                         handler: function (btn, e) {
 
