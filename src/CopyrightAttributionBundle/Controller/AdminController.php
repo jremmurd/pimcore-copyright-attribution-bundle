@@ -52,8 +52,8 @@ class AdminController extends \Pimcore\Bundle\AdminBundle\Controller\AdminContro
         $contentRegex = "/>[a-zA-Z. 0-9]+<\//";
         $contentTrimChars = "><\/";
 
-        preg_match_all($urlRegex, $flaticonText, $authorMatches);
-        $authorMatches = $authorMatches[0];
+        preg_match_all($urlRegex, $flaticonText, $urlMatches);
+        $urlMatches = $urlMatches[0];
 
         preg_match_all($contentRegex, $flaticonText, $contentMatches);
 
@@ -62,9 +62,9 @@ class AdminController extends \Pimcore\Bundle\AdminBundle\Controller\AdminContro
         }, $contentMatches[0]);
 
 
-        $authorUrl = $authorMatches[0];
-        $sourceUrl = $authorMatches[1];
-        $licenseUrl = $authorMatches[2];
+        $authorUrl = $urlMatches[0];
+        $sourceUrl = $urlMatches[1];
+        $licenseUrl = $urlMatches[2];
 
         $author = $contentMatches[0];
         $source = $contentMatches[1];
