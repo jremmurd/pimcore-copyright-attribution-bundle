@@ -20,7 +20,7 @@ pimcore.bundle.CopyrightAttributionBundle.Tab = Class.create({
             });
 
             this.flaticonButton = new Ext.Button({
-                text: t("add"),
+                text: t("add-flaticon"),
                 iconCls: "pimcore_icon_add",
                 handler: this.addFlaticon.bind(this)
             });
@@ -61,25 +61,108 @@ pimcore.bundle.CopyrightAttributionBundle.Tab = Class.create({
     },
 
     addFlaticon: function () {
-        var dlg = Ext.MessageBox.prompt('Name', 'Please enter your name:', function (btn, text) {
-            if (btn != 'ok') {
-                return;
-            }
+        var that = this;
+        var dlg = new Ext.Window({
+                width: 500,
+                height: 300,
+                modal: true,
+                autoShow: true,
+                layout: 'fit',
+                buttonAlign: 'left',
+                bodyStyle: "display: flex; align-items: center",
+                items: [
+                    {
+                        xtype: 'form',
+                        frame: false,
+                        border: 0,
+                        layout: {
+                            type: 'hbox',
+                            align: 'middle'
+                        },
+                        fieldDefaults: {
+                            msgTarget: 'side',
+                            labelWidth: 100
+                        },
+                        items: [
+                            {
+                                xtype: 'container',
+                                flex: 1,
+                                padding: 10,
+                                layout: {
+                                    type: 'vbox',
+                                    align: 'center'
+                                },
+                                items: [
+                                    {
+                                        xtype: 'textfield',
+                                        width: 400,
+                                        fieldLabel: t("copyright_attribution.subject"),
+                                        id: this.layout.id + "_subject"
+                                    },
+                                    {
+                                        xtype: 'textfield',
+                                        width: 400,
 
-            Ext.Ajax.request({
-                url: "/admin/copyright-attribution/add-flaticon",
-                extraParams: {
-                    text: text
-                }
-            })
-                .then(function () {
-                    pimcore.helpers.showNotification(t("success"), t("saved_successfully"), "success");
-                    // todo change iframe content
-                })
-                .otherwise(function () {
-                    pimcore.helpers.showNotification(t("error"), t("saving_failed"), "error");
-                });
-        });
+                                        fieldLabel: t("copyright_attribution.flaticon-text"),
+                                        id: this.layout.id + "_flaticon-text"
+                                    },
+                                    {
+                                        xtype: 'button',
+                                        text: t("add-flaticon"),
+                                        style: "margin-top: 2em",
+                                        handler: function (btn, e) {
+
+                                            var text = document.getElementById(that.layout.id + "_flaticon-text-inputEl").value;
+                                            var subject = document.getElementById(that.layout.id + "_subject-inputEl").value;
+
+                                            if (!text || !subject) {
+                                                return;
+                                            }
+
+                                            Ext.Ajax.request({
+                                                url: "/admin/copyright-attribution/add-flaticon",
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                params: {
+                                                    text: text,
+                                                    subject: subject,
+                                                }
+                                            })
+                                                .then(function (res) {
+                                                    console.log(res);
+                                                    try{
+                                                        var data = JSON.parse(res.responseText);
+                                                        if (data.error) {
+                                                            pimcore.helpers.showNotification(t("success"), t(data.error), "error");
+                                                            return;
+                                                        }
+                                                    }catch (e) {
+                                                    }
+
+                                                    try {
+                                                        pimcore.helpers.showNotification(t("success"), t("saved_successfully"), "success");
+                                                        this.up('window').close();
+                                                        that.reload();
+                                                    } catch (e) {
+                                                        console.log(e);
+                                                    }
+
+                                                }.bind(this))
+                                                .otherwise(function (e) {
+                                                    pimcore.helpers.showNotification(t("error"), t("saving_failed"), "error");
+                                                    e.stopPropagation();
+                                                });
+
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        );
     },
 
     reload: function () {
