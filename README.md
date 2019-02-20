@@ -2,9 +2,15 @@
 
 Adds a simple way to add attribution of authors of external resources like icons, graphics, etc.
 
-## Configuration
+## Getting started
+### Installation
+To install the bundle execute:
+```
+composer require jremmurd/pimcore-copyright-attribution-bundle
+```
+### Configuration
 
-Translations can be added or edited in `admin` domain.
+Translations can be edited in `admin` domain.
 
 ```yaml
 copyright_attribution:
@@ -21,10 +27,11 @@ copyright_attribution:
       - {author: "Foo Bar",     author_url: "http://www.test.at", source: "Flaticons", source_url: "http://www.flaticons.com", license: "Creative Commons BY 3.0", license_url: "http://creativecommons.org/licenses/by/3.0/"}
 ```
 
-##### Default Flaticon Import
+
+## Icons from flaticon.com
 If you are using free icons from flaticons.com you can simply copy-paste the sample text for web integration which is display on every download attempt.
 ![Screenshot](./docs/screenshot_1.png "Impression")
 
-##### Copyright Attribution Tab
+## Impressions
 The copyright attribution can be shown as list or in a table view.
 ![Screenshot](./docs/screenshot.png "Impression")
