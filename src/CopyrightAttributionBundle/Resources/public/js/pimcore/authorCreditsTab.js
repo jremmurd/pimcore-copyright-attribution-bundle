@@ -97,7 +97,8 @@ pimcore.bundle.CopyrightAttributionBundle.Tab = Class.create({
                                         xtype: 'textfield',
                                         width: 450,
                                         fieldLabel: t("copyright_attribution.subject"),
-                                        id: this.layout.id + "_subject"
+                                        id: this.layout.id + "_subject",
+                                        value: "dataobject_icons"
                                     },
                                     {
                                         xtype: 'textfield',
